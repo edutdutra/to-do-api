@@ -7,17 +7,32 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// const users = [];
+const users = [];
 
 function checksExistsUserAccount(request, response, next) {
   // Complete aqui
 }
 
-app.post('/users', (request, response) => {
-  // Complete aqui
+app.post('/users', (req, res) => {
+    const {name, username} = req.body;
+
+    const userAlreadyExists = users.some((user) => user.username === username);
+
+    if(userAlreadyExists) {
+        return res.status(400).json({error: "Username already exists!"});
+    }
+
+    users.push({
+        id: v4(),
+        name,
+        username,
+        todos: []
+    });
+
+    return res.status(201).send();
 });
 
-app.get('/todos', checksExistsUserAccount, (request, response) => {
+app.get('/todos', checksExistsUserAccount, (req, res) => {
   // Complete aqui
 });
 
