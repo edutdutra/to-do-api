@@ -1,7 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-
-// const { v4: uuidv4 } = require('uuid');
+import express from 'express';
+import cors from 'cors'
+import { v4 } from 'uuid';
 
 const app = express();
 
@@ -38,4 +37,4 @@ app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
   // Complete aqui
 });
 
-module.exports = app;
+export default app
