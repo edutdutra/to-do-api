@@ -1,6 +1,6 @@
-import express from 'express';
-import cors from 'cors'
-import {v4} from 'uuid';
+const express = require('express');
+const cors = require('cors');
+const { v4 } = require('uuid');
 
 const app = express();
 
@@ -56,8 +56,8 @@ app.post('/todos', checksExistsUserAccount, (req, res) => {
         id: v4(),
         title,
         done: false,
-        deadline: new Date(deadline),
-        createdAt: new Date()
+        deadline,
+        created_at: new Date()
     };
 
     user.todos.push(newTodo);
@@ -108,8 +108,7 @@ app.delete('/todos/:id', checksExistsUserAccount, (req, res) => {
     }
 
     user.todos.splice(todo, 1);
-
-    return res.status(204);
+    return res.status(204).send();
 });
 
-export default app
+module.exports = app;
